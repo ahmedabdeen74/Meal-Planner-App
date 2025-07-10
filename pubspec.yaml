@@ -113,6 +113,7 @@ flutter:
         - asset: assets/fonts/hurricane/Hurricane-Regular.ttf
   assets:
     - assets/fonts/
+    - assets/images/
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

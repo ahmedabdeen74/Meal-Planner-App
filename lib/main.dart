@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MealPlanner extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-           // Image.asset(AssetsData.mealDetails1),
+           Image.asset(AssetsData.mealDetails1),
           ],
         ),
         
