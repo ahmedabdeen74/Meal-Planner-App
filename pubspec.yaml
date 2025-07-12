@@ -80,7 +80,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: NotoSans
+    - family: noto_sans
       fonts:
         - asset: assets/fonts/noto_sans/NotoSans-Light.ttf
           weight: 300
@@ -97,11 +97,11 @@ flutter:
         - asset: assets/fonts/noto_sans/NotoSans-Black.ttf
           weight: 900
 
-    - family: FleurDeLeah
+    - family: fleur_de_leah
       fonts:
         - asset: assets/fonts/fleur_de_leah/FleurDeLeah-Regular.ttf
 
-    - family: NotoSerif
+    - family: noto_serif
       fonts:
         - asset: assets/fonts/noto_serif/NotoSerif-Regular.ttf
           weight: 400

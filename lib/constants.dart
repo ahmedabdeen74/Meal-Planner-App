@@ -13,6 +13,6 @@ void hideKeyboardFromScreen(BuildContext context) {
 OutlineInputBorder buildBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(16),
-    borderSide: const BorderSide(color: kSecondaryColor),
+    borderSide: const BorderSide(color: kPrimaryColor),
   );
 }
