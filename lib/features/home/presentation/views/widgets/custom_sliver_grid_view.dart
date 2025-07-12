@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/features/home/presentation/views/widgets/meal_card.dart';
+
+class CustomSliverGridView extends StatelessWidget {
+  const CustomSliverGridView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverGrid.builder(
+      itemCount: 4,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+        childAspectRatio: 0.75,
+      ),
+      itemBuilder: (context, index) {
+        return MealCard(
+          style1: Styles.textStyleMedium14,
+          style2: Styles.textStyleregular12.copyWith(color: Color(0xff878787)),
+          height: MediaQuery.sizeOf(context).height * .17,
+          right: 6,
+          bottom: 4,
+        );
+      },
+    );
+  }
+}
