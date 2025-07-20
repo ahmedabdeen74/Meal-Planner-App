@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meal_planner/core/utility/app_router.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 
@@ -8,7 +10,8 @@ class MealCard extends StatelessWidget {
     required this.height,
     this.bottom = 12,
     this.right = 14,
-    this.style1 = Styles.textStyleMedium18,required this.style2,
+    this.style1 = Styles.textStyleMedium18,
+    required this.style2,
   });
   final double height;
   final double? bottom;
@@ -17,13 +20,15 @@ class MealCard extends StatelessWidget {
   final TextStyle style2;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              GoRouter.of(context).push(AppRouter.kMealDetails);
+            },
+            child: Stack(
               children: [
                 Container(
                   height: height, //MediaQuery.sizeOf(context).height * .35,
@@ -46,8 +51,8 @@ class MealCard extends StatelessWidget {
                   bottom: bottom,
                   right: right,
                   child: Container(
-                    height: 26,
-                    width: 86,
+                    height: MediaQuery.sizeOf(context).height * .04,
+                    //width: 86,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6,
                       vertical: 2,
@@ -68,23 +73,17 @@ class MealCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Text(
-                "Spicy Arrabiata Penne",
-                style: style1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Text(
-                "Italian",
-                style: style2
-              ),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Text("Spicy Arrabiata Penne", style: style1),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Text("Italian", style: style2),
+          ),
+        ],
       ),
     );
   }
