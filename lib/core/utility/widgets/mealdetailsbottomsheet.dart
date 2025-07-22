@@ -94,7 +94,6 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
   }
 }
 
-
 /*
 class MealDetailsBottomSheet extends StatelessWidget {
   const MealDetailsBottomSheet({super.key});

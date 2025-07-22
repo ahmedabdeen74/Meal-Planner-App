@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:meal_planner/core/utility/assets.dart';
+
 // better than list view.builder in scroll to show item by item.
 final meals = [
-      {
-        "image":AssetsData.home2,
-        "title": "Spicy Arrabiata Penne",
-        "country": "Italian"
-      },
-      {
-        "image": AssetsData.home1,
-        "title": "Chicken Biryani",
-        "country": "Indian"
-      },
-      {
-        "image": AssetsData.mealDetails1,
-        "title": "Beef Tacos",
-        "country": "Mexican"
-      },
-    ];
-
+  {
+    "image": AssetsData.home2,
+    "title": "Spicy Arrabiata Penne",
+    "country": "Italian",
+  },
+  {"image": AssetsData.home1, "title": "Chicken Biryani", "country": "Indian"},
+  {
+    "image": AssetsData.mealDetails1,
+    "title": "Beef Tacos",
+    "country": "Mexican",
+  },
+];
 
 class VerticalMealCards extends StatelessWidget {
   const VerticalMealCards({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: PageView.builder(
         scrollDirection: Axis.horizontal,
@@ -74,10 +69,7 @@ class VerticalMealCards extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         meal["country"]!,
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                     ],
                   ),

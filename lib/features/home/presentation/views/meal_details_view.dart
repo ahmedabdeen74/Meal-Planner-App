@@ -6,8 +6,6 @@ class MealDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MealDetailsBody(),
-    );
+    return Scaffold(body: MealDetailsBody());
   }
 }

@@ -16,7 +16,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     super.initState();
-   Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 5), () {
       // use replace not go or push to prevent user to back to splash again.
       if (mounted) {
         GoRouter.of(context).replace(AppRouter.kHomeView);

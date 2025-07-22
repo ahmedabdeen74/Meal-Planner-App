@@ -28,20 +28,21 @@ class MealDetailsAppBar extends StatelessWidget {
                 children: [
                   SizedBox(height: 16),
                   GestureDetector(
-                    onTap: () {     
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
                         Icon(Icons.calendar_today, size: 24, weight: 24),
                         SizedBox(width: 12),
-                        Text("Add To Calendar", style: Styles.textStyleRegular18),
+                        Text(
+                          "Add To Calendar",
+                          style: Styles.textStyleRegular18,
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(height: 32),
                   GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
                         Icon(Icons.favorite_outline, size: 24, weight: 24),
@@ -55,8 +56,7 @@ class MealDetailsAppBar extends StatelessWidget {
                   ),
                   SizedBox(height: 32),
                   GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
                         Icon(Icons.share, size: 24, weight: 24),

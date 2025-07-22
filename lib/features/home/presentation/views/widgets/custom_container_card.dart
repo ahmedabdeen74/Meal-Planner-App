@@ -3,9 +3,13 @@ import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 
 class CustomContainerCard extends StatelessWidget {
-  const CustomContainerCard({super.key, required this.category, required this.image});
-   final String category;
-   final String image;
+  const CustomContainerCard({
+    super.key,
+    required this.category,
+    required this.image,
+  });
+  final String category;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(

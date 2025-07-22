@@ -10,7 +10,10 @@ class CustomAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Morning, User",style: Styles.textStyleregular36.copyWith(color: Color(0xff58544A),),),
+        Text(
+          "Morning, User",
+          style: Styles.textStyleregular36.copyWith(color: Color(0xff58544A)),
+        ),
         Image.asset(AssetsData.user),
       ],
     );
