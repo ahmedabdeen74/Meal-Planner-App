@@ -10,27 +10,37 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl({required this.apiService});
   @override
-  Future<Either<Failure, List<Meal>>> fetchMealDetails(String mealId) {
-    // TODO: implement fetchMealDetails
-    throw UnimplementedError();
+  Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
+    try {
+      final data = await apiService.get(endpoint: "lookup.php?i=$mealId");
+      final Meal? meal = MealModel.fromJson(data).meals?.first;
+      return meal != null
+          ? right(meal)
+          : left(ServerFailure('Meal not found'));
+    } catch (e) {
+      return left(ServerFailure('Failed to fetch meal details: $e'));
+    }
   }
 
   @override
   Future<Either<Failure, List<Meal>>> fetchMeals({int count = 5}) async {
-  try {
-    final futures = List.generate(count, (_) => apiService.get(endpoint: "random.php"));
-    final responses = await Future.wait(futures);
+    try {
+      final futures = List.generate(
+        count,
+        (_) => apiService.get(endpoint: "random.php"),
+      );
+      final responses = await Future.wait(futures);
 
-    final meals = responses
-        .map((data) => MealModel.fromJson(data).meals?.first)
-        .whereType<Meal>()
-        .toList();
+      final meals = responses
+          .map((data) => MealModel.fromJson(data).meals?.first)
+          .whereType<Meal>()
+          .toList();
 
-    return right(meals);
-  } catch (e) {
-    return left(ServerFailure('Failed to fetch meals: $e'));
+      return right(meals);
+    } catch (e) {
+      return left(ServerFailure('Failed to fetch meals: $e'));
+    }
   }
-}
 }
 /*class HomeRepoImpl implements HomeRepo {
   final HomeRemoteDataSource remoteDataSource;
