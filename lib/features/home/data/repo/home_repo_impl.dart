@@ -27,7 +27,7 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<Meal>>> fetchMeals({int count = 5}) async {
+  Future<Either<Failure, List<Meal>>> fetchMeals({required int count }) async {
     try {
       final futures = List.generate(
         count,
