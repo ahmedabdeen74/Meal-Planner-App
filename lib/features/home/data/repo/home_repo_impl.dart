@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:meal_planner/core/utility/api_service.dart';
 import 'package:meal_planner/core/utility/errors/failures.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
@@ -16,9 +17,12 @@ class HomeRepoImpl implements HomeRepo {
       final Meal? meal = MealModel.fromJson(data).meals?.first;
       return meal != null
           ? right(meal)
-          : left(ServerFailure('Meal not found'));
+          : left(ServerFailure(errMessage: "Meal not found"));
     } catch (e) {
-      return left(ServerFailure('Failed to fetch meal details: $e'));
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+        return left(ServerFailure(errMessage: e.toString()));
     }
   }
 
@@ -38,7 +42,10 @@ class HomeRepoImpl implements HomeRepo {
 
       return right(meals);
     } catch (e) {
-      return left(ServerFailure('Failed to fetch meals: $e'));
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+        return left(ServerFailure(errMessage: e.toString()));
     }
   }
 }
