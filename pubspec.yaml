@@ -60,6 +60,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
+flutter_assets:
+  assets_path: assets/images
+  output_path: lib\core\utility
+  filename: assets_generator.dart
+  field_prefix:
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -123,3 +128,4 @@ flutter:
     - assets/images/
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+

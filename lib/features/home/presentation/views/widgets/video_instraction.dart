@@ -34,10 +34,14 @@ class VideoInstraction extends StatelessWidget {
               right: 150,
               left: 150,
               top: 50,
-              child: Row(children: [GestureDetector(
-                onTap: () {
-                },
-                child: Image.asset(AssetsData.video))]),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Image.asset(AssetsData.email),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

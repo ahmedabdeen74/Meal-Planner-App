@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:meal_planner/core/utility/app_router.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/core/utility/widgets/mealdetailsbottomsheet.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({
@@ -26,8 +25,14 @@ class MealCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kMealDetails);
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) => const MealDetailsBottomSheet(),
+              );
             },
+
             child: Stack(
               children: [
                 Container(

@@ -18,6 +18,4 @@ abstract class AssetsData {
   static const splash = 'assets/images/splash.jpg';
   static const user = 'assets/images/user.png';
   static const video = 'assets/images/video.png';
-
-  
 }
