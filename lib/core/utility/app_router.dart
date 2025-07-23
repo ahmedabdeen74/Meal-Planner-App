@@ -1,6 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'package:meal_planner/features/calendar/calendar_view.dart';
+import 'package:meal_planner/features/explore/explore_view.dart';
+import 'package:meal_planner/features/favourite/favourite_view.dart';
 import 'package:meal_planner/features/home/presentation/views/home_view.dart';
 import 'package:meal_planner/features/home/presentation/views/meal_details_view.dart';
+import 'package:meal_planner/features/search/search_view.dart';
 import 'package:meal_planner/features/splash/presentation/views/splash_view.dart';
 
 class AppRouter {
@@ -19,6 +23,22 @@ class AppRouter {
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
+          GoRoute(
+      path: kCalendarView,
+      builder: (context, state) => const CalendarView(),
+    ),
+    GoRoute(
+      path: kFavouriteView,
+      builder: (context, state) => const FavouriteView(),
+    ),
+    GoRoute(
+      path: kExploreView,
+      builder: (context, state) => const ExploreView(),
+    ),
+    GoRoute(
+      path: kSearchView,
+      builder: (context, state) => const SearchView(),
+    ),
      /* GoRoute(
         path: kMealDetails,
         builder: (context, state) => const MealDetailsView(),

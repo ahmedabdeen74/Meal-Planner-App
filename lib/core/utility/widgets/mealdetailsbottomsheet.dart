@@ -74,9 +74,11 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                             const SliverToBoxAdapter(
                               child: SizedBox(height: 16),
                             ),
-                          SliverToBoxAdapter(child: MealDetailsCard(meal: state.meal)),
+                          SliverToBoxAdapter(
+                            child: MealDetailsCard(meal: state.meal),
+                          ),
                           const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                           ListViewIngrediant(meal: state.meal),
+                          ListViewIngrediant(meal: state.meal),
                           const SliverToBoxAdapter(child: SizedBox(height: 16)),
                           const SliverToBoxAdapter(
                             child: Padding(
@@ -88,7 +90,9 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                             ),
                           ),
                           const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                           SliverToBoxAdapter(child: VideoInstraction(meal:state.meal)),
+                          SliverToBoxAdapter(
+                            child: VideoInstraction(meal: state.meal),
+                          ),
                           const SliverToBoxAdapter(child: SizedBox(height: 24)),
                         ],
                       ),
@@ -99,7 +103,7 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
             },
           );
         } else if (state is FetchMealDetailsLoading) {
-          return Center(child: CircularProgressIndicator());
+          return Text("");
         } else if (state is FetchMealDetailsFailure) {
           return Center(child: Text("Error: ${state.errorMessage}"));
         }

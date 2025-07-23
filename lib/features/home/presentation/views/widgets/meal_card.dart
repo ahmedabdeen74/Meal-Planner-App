@@ -67,7 +67,7 @@ class MealCard extends StatelessWidget {
                   right: right,
                   child: Container(
                     height: MediaQuery.sizeOf(context).height * .04,
-                    //width: 86,
+                    width: 85,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6,
                       vertical: 2,

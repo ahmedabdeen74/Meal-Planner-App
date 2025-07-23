@@ -3,6 +3,7 @@ import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 class VideoInstraction extends StatefulWidget {
   const VideoInstraction({super.key, required this.meal});
   final Meal meal;
@@ -56,7 +57,10 @@ class _VideoInstractionState extends State<VideoInstraction> {
                 borderRadius: BorderRadius.circular(16),
                 child: isVideoVisible && videoUrl != null
                     ? WebViewWidget(controller: _controller)
-                    : Image.network(widget.meal.strMealThumb ?? "", fit: BoxFit.cover),
+                    : Image.network(
+                        widget.meal.strMealThumb ?? "",
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             if (!isVideoVisible)
@@ -69,7 +73,7 @@ class _VideoInstractionState extends State<VideoInstraction> {
                       });
                     },
                     child: Image.asset(
-                      AssetsData.video,
+                      AssetsData.video1,
                       width: 64,
                       height: 64,
                     ),
