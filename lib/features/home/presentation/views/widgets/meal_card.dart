@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:meal_planner/core/utility/assets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/core/utility/widgets/mealdetailsbottomsheet.dart';
+import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
+import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_details_cubit/fetch_meal_details_cubit.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({
@@ -11,12 +13,14 @@ class MealCard extends StatelessWidget {
     this.right = 14,
     this.style1 = Styles.textStyleMedium18,
     required this.style2,
+    required this.meal,
   });
   final double height;
   final double? bottom;
   final double? right;
   final TextStyle? style1;
   final TextStyle style2;
+  final Meal meal;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,6 +29,9 @@ class MealCard extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
+              BlocProvider.of<FetchMealDetailsCubit>(
+                context,
+              ).fetchMealDetails(id: meal.idMeal!);
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
@@ -49,7 +56,10 @@ class MealCard extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadiusGeometry.circular(16),
-                    child: Image.asset(AssetsData.home1, fit: BoxFit.cover),
+                    child: Image.network(
+                      meal.strMealThumb ?? "",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -69,7 +79,7 @@ class MealCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Vegetarian",
+                        meal.strCategory ?? "Category",
                         textAlign: TextAlign.center,
                         style: Styles.textStyleregular12,
                       ),
@@ -82,11 +92,11 @@ class MealCard extends StatelessWidget {
           SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.only(left: 12),
-            child: Text("Spicy Arrabiata Penne", style: style1),
+            child: Text(meal.strMeal ?? "no name founded", style: style1),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 12),
-            child: Text("Italian", style: style2),
+            child: Text(meal.strArea ?? "no area founded", style: style2),
           ),
         ],
       ),

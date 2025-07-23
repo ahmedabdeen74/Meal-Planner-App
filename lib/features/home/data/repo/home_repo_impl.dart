@@ -14,20 +14,18 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
     try {
       final data = await apiService.get(endpoint: "lookup.php?i=$mealId");
-      final Meal? meal = MealModel.fromJson(data).meals?.first;
-      return meal != null
-          ? right(meal)
-          : left(ServerFailure(errMessage: "Meal not found"));
+      final Meal meal = MealModel.fromJson(data).meals!.first;
+      return right(meal);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }
-        return left(ServerFailure(errMessage: e.toString()));
+      return left(ServerFailure(errMessage: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, List<Meal>>> fetchMeals({required int count }) async {
+  Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
     try {
       final futures = List.generate(
         count,
@@ -45,7 +43,7 @@ class HomeRepoImpl implements HomeRepo {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }
-        return left(ServerFailure(errMessage: e.toString()));
+      return left(ServerFailure(errMessage: e.toString()));
     }
   }
 }

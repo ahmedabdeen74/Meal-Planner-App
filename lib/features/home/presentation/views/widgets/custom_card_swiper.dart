@@ -1,36 +1,21 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:meal_planner/core/utility/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/core/utility/widgets/mealdetailsbottomsheet.dart';
+import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
+import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_details_cubit/fetch_meal_details_cubit.dart';
 
 class CustomCardSwiper extends StatefulWidget {
-  const CustomCardSwiper({super.key});
-
+  const CustomCardSwiper({super.key, required this.meals, required this.itemCount});
+  final List<Meal> meals;
+  final int itemCount;
   @override
   State<CustomCardSwiper> createState() => _CardSwiperExampleState();
 }
 
 class _CardSwiperExampleState extends State<CustomCardSwiper> {
-  final List<Map<String, String>> meals = [
-    {
-      "image": AssetsData.home1,
-      "title": "Italian",
-      "category": "Spicy Arrabiata Penne",
-    },
-    {
-      "image": AssetsData.home2,
-      "title": "French",
-      "category": "Spicy Arrabiata Penne",
-    },
-    {
-      "image": AssetsData.home1,
-      "title": "Egyptian",
-      "category": "Spicy Arrabiata Penne",
-    },
-  ];
-
   int currentIndex = 0;
 
   @override
@@ -41,13 +26,22 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          GoRouter.of(context).push(AppRouter.kMealDetails);
+          BlocProvider.of<FetchMealDetailsCubit>(
+            context,
+          ).fetchMealDetails(id: widget.meals[currentIndex].idMeal!);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => const MealDetailsBottomSheet(),
+          );
+          //  GoRouter.of(context).push(AppRouter.kMealDetails);
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Swiper(
-              itemCount: meals.length,
+              itemCount: widget.meals.length,
               layout: SwiperLayout.STACK,
               itemWidth: cardWidth,
               itemHeight: cardHeight,
@@ -61,8 +55,8 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        meals[index]["image"]!,
+                      child: Image.network(
+                       widget.meals[index].strMealThumb ?? AssetsData.home1,
                         fit: BoxFit.cover,
                         width: cardWidth,
                         height: cardHeight,
@@ -86,12 +80,12 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                meals[index]["category"]!,
+                                widget.meals[index].strMeal ?? "Unknown Meal",
                                 style: Styles.textStyleSemibold13.copyWith(),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                meals[index]["title"]!,
+                               widget.meals[index].strArea ?? "Area",
                                 style: Styles.textStyleLight12.copyWith(
                                   color: Colors.white,
                                 ),

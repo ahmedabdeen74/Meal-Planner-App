@@ -19,10 +19,10 @@ class AppRouter {
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
-      GoRoute(
+     /* GoRoute(
         path: kMealDetails,
         builder: (context, state) => const MealDetailsView(),
-      ),
+      ),*/
     ],
   );
 }

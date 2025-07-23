@@ -7,6 +7,7 @@ import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_d
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meals_cubit/fetch_meals_cubit.dart';
 
 void main() {
+  setupServiceLocator(); // Ensure all dependencies are registered
   runApp(const MealPlanner());
 }
 

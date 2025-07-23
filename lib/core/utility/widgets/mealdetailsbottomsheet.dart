@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_details_cubit/fetch_meal_details_cubit.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/list_view_ingrediant.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/meal_details_app_bar.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/meal_details_card.dart';
@@ -31,64 +33,77 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      controller: _draggableController,
-      expand: false,
-      initialChildSize: 0.85,
-      minChildSize: 0.5,
-      maxChildSize: 0.96,
-      builder: (context, scrollController) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-          ),
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-          child: Column(
-            children: [
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 8, bottom: 8),
-                  child: Container(
-                    width: 50,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
+    return BlocBuilder<FetchMealDetailsCubit, FetchMealDetailsState>(
+      builder: (context, state) {
+        if (state is FetchMealDetailsSuccess) {
+          return DraggableScrollableSheet(
+            controller: _draggableController,
+            expand: true,
+            initialChildSize: 0.85,
+            minChildSize: 0.5,
+            maxChildSize: 0.96,
+            builder: (context, scrollController) {
+              return Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
-              ),
-              if (showAppBar) const MealDetailsAppBar(),
-              Expanded(
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    if (showAppBar)
-                      //    const SliverToBoxAdapter(child: MealDetailsAppBar()),
-                      const SliverToBoxAdapter(child: SizedBox(height: 16)),
-                    const SliverToBoxAdapter(child: MealDetailsCard()),
-                    const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                    const ListViewIngrediant(),
-                    const SliverToBoxAdapter(child: SizedBox(height: 16)),
-                    const SliverToBoxAdapter(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                child: Column(
+                  children: [
+                    Center(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 12),
-                        child: Text(
-                          "Recipe Video",
-                          style: Styles.textStyleSemibold21,
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
+                        child: Container(
+                          width: 50,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
                         ),
                       ),
                     ),
-                    const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                    const SliverToBoxAdapter(child: VideoInstraction()),
-                    const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                    if (showAppBar) const MealDetailsAppBar(),
+                    Expanded(
+                      child: CustomScrollView(
+                        controller: scrollController,
+                        slivers: [
+                          if (showAppBar)
+                            //    const SliverToBoxAdapter(child: MealDetailsAppBar()),
+                            const SliverToBoxAdapter(
+                              child: SizedBox(height: 16),
+                            ),
+                          SliverToBoxAdapter(child: MealDetailsCard(meal: state.meal)),
+                          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+                           ListViewIngrediant(meal: state.meal),
+                          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+                          const SliverToBoxAdapter(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12),
+                              child: Text(
+                                "Recipe Video",
+                                style: Styles.textStyleSemibold21,
+                              ),
+                            ),
+                          ),
+                          const SliverToBoxAdapter(child: SizedBox(height: 8)),
+                           SliverToBoxAdapter(child: VideoInstraction(meal:state.meal)),
+                          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        );
+              );
+            },
+          );
+        } else if (state is FetchMealDetailsLoading) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is FetchMealDetailsFailure) {
+          return Center(child: Text("Error: ${state.errorMessage}"));
+        }
+        return const SizedBox.shrink();
       },
     );
   }

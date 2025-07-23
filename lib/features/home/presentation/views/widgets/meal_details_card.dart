@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/custom_container_card.dart';
 
 class MealDetailsCard extends StatelessWidget {
-  const MealDetailsCard({super.key});
-
+  const MealDetailsCard({super.key, required this.meal});
+  final Meal meal;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Spicy Arrabiata Penne",
+          meal.strMeal ?? "Meal Name",
           style: Styles.textStyleBold24.copyWith(color: Color(0xff232323)),
         ),
         Text(
@@ -36,7 +37,10 @@ class MealDetailsCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadiusGeometry.circular(16),
-                child: Image.asset(AssetsData.home1, fit: BoxFit.cover),
+                child: Image.network(
+                  meal.strMealThumb ?? "",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Positioned(
@@ -45,12 +49,12 @@ class MealDetailsCard extends StatelessWidget {
               child: Row(
                 children: [
                   CustomContainerCard(
-                    category: "Japanese",
+                    category: meal.strArea ?? "Japanese",
                     image: AssetsData.mealDetails2,
                   ),
                   SizedBox(width: 12),
                   CustomContainerCard(
-                    category: "Chicken",
+                    category: meal.strCategory ?? "Category",
                     image: AssetsData.mealDetails1,
                   ),
                 ],
