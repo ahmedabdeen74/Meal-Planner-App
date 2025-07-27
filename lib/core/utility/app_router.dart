@@ -4,7 +4,7 @@ import 'package:meal_planner/features/explore/explore_view.dart';
 import 'package:meal_planner/features/favourite/favourite_view.dart';
 import 'package:meal_planner/features/home/presentation/views/home_view.dart';
 import 'package:meal_planner/features/home/presentation/views/meal_details_view.dart';
-import 'package:meal_planner/features/search/search_view.dart';
+import 'package:meal_planner/features/search/presentation/views/search_view.dart';
 import 'package:meal_planner/features/splash/presentation/views/splash_view.dart';
 
 class AppRouter {

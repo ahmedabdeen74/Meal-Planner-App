@@ -4,7 +4,7 @@ import 'package:meal_planner/features/calendar/calendar_view.dart';
 import 'package:meal_planner/features/explore/explore_view.dart';
 import 'package:meal_planner/features/favourite/favourite_view.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/home_view_body.dart';
-import 'package:meal_planner/features/search/search_view.dart';
+import 'package:meal_planner/features/search/presentation/views/search_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
