@@ -6,8 +6,9 @@ import 'package:meal_planner/features/search/presentation/views/widgets/list_vie
 import 'package:meal_planner/features/search/presentation/views/widgets/search_view_app_bar.dart';
 
 class FirstSearchBodyView extends StatelessWidget {
-  const FirstSearchBodyView({super.key});
-
+  const FirstSearchBodyView({super.key, this.onChanged, this.onTap});
+  final void Function(String)? onChanged;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -16,7 +17,7 @@ class FirstSearchBodyView extends StatelessWidget {
         children: [
           SearchViewAppBar(),
           SizedBox(height: 32),
-          CustomTextField(),
+          CustomTextField(onChanged: onChanged, onTap: onTap),
           SizedBox(height: 32),
           Text("Recent Searches", style: Styles.textStyleMedium18),
           SizedBox(height: 16),
