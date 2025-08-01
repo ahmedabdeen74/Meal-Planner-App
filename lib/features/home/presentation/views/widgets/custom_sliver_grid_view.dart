@@ -4,9 +4,13 @@ import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/meal_card.dart';
 
 class CustomSliverGridView extends StatelessWidget {
-  const CustomSliverGridView({super.key, required this.meal, required this.itemCount});
+  const CustomSliverGridView({
+    super.key,
+    required this.meal,
+    required this.itemCount,
+  });
   final List<Meal> meal;
-  final int itemCount;
+  final int? itemCount;
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(

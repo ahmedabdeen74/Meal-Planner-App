@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_planner/core/utility/assets_generator.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/features/search/presentation/views/widgets/custom_text_field.dart';
+import 'package:meal_planner/features/search/presentation/views/widgets/list_view_last_search_item.dart';
 import 'package:meal_planner/features/search/presentation/views/widgets/list_view_search_item.dart';
 import 'package:meal_planner/features/search/presentation/views/widgets/search_view_app_bar.dart';
 
@@ -21,14 +22,14 @@ class FirstSearchBodyView extends StatelessWidget {
           SizedBox(height: 32),
           Text("Recent Searches", style: Styles.textStyleMedium18),
           SizedBox(height: 16),
-          ListViewSearchItem(
-            searchIcoon: Image.asset(Assets.imagesSearchIconPurple),
+          ListViewLastSearchItem(
+            searchIcon: Image.asset(Assets.imagesSearchIconPurple),
           ),
           SizedBox(height: 16),
           Text("Popular Searches", style: Styles.textStyleMedium18),
           SizedBox(height: 16),
           ListViewSearchItem(
-            searchIcoon: Image.asset(Assets.imagesPopularSearch),
+            searchIcon: Image.asset(Assets.imagesPopularSearch),
           ),
         ],
       ),

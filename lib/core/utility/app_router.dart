@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:meal_planner/features/calendar/calendar_view.dart';
-import 'package:meal_planner/features/explore/explore_view.dart';
+import 'package:meal_planner/features/explore/presentation/views/explore_view.dart';
+import 'package:meal_planner/features/explore/presentation/views/explore_view_details.dart';
 import 'package:meal_planner/features/favourite/favourite_view.dart';
 import 'package:meal_planner/features/home/presentation/views/home_view.dart';
-import 'package:meal_planner/features/home/presentation/views/meal_details_view.dart';
+import 'package:meal_planner/features/search/presentation/views/search_result_view.dart';
 import 'package:meal_planner/features/search/presentation/views/search_view.dart';
 import 'package:meal_planner/features/splash/presentation/views/splash_view.dart';
 
@@ -18,31 +19,40 @@ class AppRouter {
   static const kCalendarView = "/calendar_view";
   static const kExploreView = "/explore_view";
   static const kSettingsView = "/settings_view";
+  static const kSearchResultView = "/search_result_view";
+  static const kExploreViewDetails = "/explore_details_view";
 
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
-          GoRoute(
-      path: kCalendarView,
-      builder: (context, state) => const CalendarView(),
-    ),
-    GoRoute(
-      path: kFavouriteView,
-      builder: (context, state) => const FavouriteView(),
-    ),
-    GoRoute(
-      path: kExploreView,
-      builder: (context, state) => const ExploreView(),
-    ),
-    GoRoute(
-      path: kSearchView,
-      builder: (context, state) => const SearchView(),
-    ),
-     /* GoRoute(
-        path: kMealDetails,
-        builder: (context, state) => const MealDetailsView(),
-      ),*/
+      GoRoute(
+        path: kCalendarView,
+        builder: (context, state) => const CalendarView(),
+      ),
+      GoRoute(
+        path: kFavouriteView,
+        builder: (context, state) => const FavouriteView(),
+      ),
+      GoRoute(
+        path: kExploreView,
+        builder: (context, state) => const ExploreView(),
+      ),
+      GoRoute(
+        path: kSearchView,
+        builder: (context, state) => const SearchView(),
+      ),
+      GoRoute(
+        path: kSearchResultView,
+        builder: (context, state) {
+          final mealName = state.extra as String;
+          return SearchResultView(mealName: mealName);
+        },
+      ),
+      GoRoute(
+        path: kExploreViewDetails,
+        builder: (context, state) => const ExploreViewDetails(),
+      ),
     ],
   );
 }

@@ -143,8 +143,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         style2: Styles.textStyleLight13.copyWith(
                           color: Color(0xff4E4E4E),
                         ),
+                        showIngredientsCountInsteadOfArea: true,
                       ),
                     ),
+
                     SliverToBoxAdapter(child: SizedBox(height: 24)),
                   ],
                 ),

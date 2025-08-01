@@ -50,6 +50,7 @@ dependencies:
   webview_flutter: ^4.2.2
   shimmer: ^3.0.0
   google_nav_bar: ^5.0.6
+  lottie: ^2.6.0
 
 dev_dependencies:
 
@@ -133,6 +134,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
+    - assets/animations/
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 

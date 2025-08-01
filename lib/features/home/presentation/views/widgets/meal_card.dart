@@ -14,6 +14,7 @@ class MealCard extends StatelessWidget {
     this.style1 = Styles.textStyleMedium18,
     required this.style2,
     required this.meal,
+    this.showIngredientsCountInsteadOfArea = false,
   });
   final double height;
   final double? bottom;
@@ -21,6 +22,7 @@ class MealCard extends StatelessWidget {
   final TextStyle? style1;
   final TextStyle style2;
   final Meal meal;
+  final bool showIngredientsCountInsteadOfArea;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +33,7 @@ class MealCard extends StatelessWidget {
             onTap: () {
               BlocProvider.of<FetchMealDetailsCubit>(
                 context,
-              ).fetchMealDetails(id: meal.idMeal!);
+              ).fetchMealDetails(id: meal.idMeal ?? "");
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
@@ -56,12 +58,15 @@ class MealCard extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadiusGeometry.circular(16),
-                    child: Image.network(
+                    child: /*Image.asset(
+                      Assets.imagesHome1,
+                      fit: BoxFit.cover,*/ Image.network(
                       meal.strMealThumb ?? "",
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
+
                 Positioned(
                   bottom: bottom,
                   right: right,
@@ -96,7 +101,12 @@ class MealCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 12),
-            child: Text(meal.strArea ?? "no area founded", style: style2),
+            child: Text(
+              showIngredientsCountInsteadOfArea
+                  ? "${meal.getIngredients().length} Ingredients"
+                  : meal.strArea ?? "no area founded",
+              style: style2,
+            ),
           ),
         ],
       ),
