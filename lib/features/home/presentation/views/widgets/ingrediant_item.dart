@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+
 class IngrediantItem extends StatelessWidget {
-  const IngrediantItem({super.key,required this.ingredient, required this.measure});
+  const IngrediantItem({
+    super.key,
+    required this.ingredient,
+    required this.measure,
+  });
   final String ingredient;
   final String measure;
   @override

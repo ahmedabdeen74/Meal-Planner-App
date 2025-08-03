@@ -135,6 +135,8 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/animations/
+    - assets/areas/
+    - assets/categories/
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 

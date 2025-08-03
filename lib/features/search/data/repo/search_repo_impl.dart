@@ -10,13 +10,13 @@ class SearchRepoImpl implements SearchRepo {
   final ApiService apiService;
 
   SearchRepoImpl({required this.apiService});
-@override
+  @override
   Future<Either<Failure, List<Meal>>> fetchMealsByName(String name) async {
     try {
       final data = await apiService.get(endpoint: "search.php?s=$name");
       final meals = MealModel.fromJson(data).meals ?? [];
       // Optionally, limit the number of meals returned to 'count'
-     // final limitedMeals = meals.take(count).toList();
+      // final limitedMeals = meals.take(count).toList();
       return right(meals);
     } catch (e) {
       if (e is DioException) {

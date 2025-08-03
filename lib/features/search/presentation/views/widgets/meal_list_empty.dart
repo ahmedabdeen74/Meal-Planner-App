@@ -6,7 +6,12 @@ import 'package:meal_planner/features/search/presentation/views/widgets/custom_t
 import 'package:meal_planner/features/search/presentation/views/widgets/search_view_app_bar.dart';
 
 class MealListEmpty extends StatelessWidget {
-  const MealListEmpty({super.key, this.controller, this.onTapBack, this.onTapRemove});
+  const MealListEmpty({
+    super.key,
+    this.controller,
+    this.onTapBack,
+    this.onTapRemove,
+  });
   final TextEditingController? controller;
   final void Function()? onTapBack;
   final void Function()? onTapRemove;

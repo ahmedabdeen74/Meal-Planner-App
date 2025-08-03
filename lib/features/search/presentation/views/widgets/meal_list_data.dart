@@ -5,16 +5,12 @@ import 'package:meal_planner/features/search/presentation/views/widgets/list_vie
     show ListViewSearchResultItem;
 
 class MealListData extends StatelessWidget {
-  const MealListData({
-    super.key,
-   
-    required this.meals,
-  });
+  const MealListData({super.key, required this.meals});
   final List<Meal> meals;
   @override
   Widget build(BuildContext context) {
     return //SingleChildScrollView(
-      /*  child: Column(
+    /*  child: Column(
         children: [
           SearchViewAppBar(),
           SizedBox(height: 32),
@@ -39,24 +35,23 @@ class MealListData extends StatelessWidget {
             ),
           ),
         Divider(color: Color(0xff757780), thickness: 1.5, height: 1),*/
-      Container(
-        decoration: BoxDecoration(
-          color: Color(0xffEEEFF3),
-          borderRadius: BorderRadius.circular(16),
+    Container(
+      decoration: BoxDecoration(
+        color: Color(0xffEEEFF3),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListViewSearchResultItem(meals: meals),
+            SizedBox(height: 16),
+            Divider(color: Color(0xffC5C6D0), thickness: 1, height: 1),
+            ListViewCustomSearchResultItem(meals: meals),
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListViewSearchResultItem(meals: meals),
-              SizedBox(height: 16),
-              Divider(color: Color(0xffC5C6D0), thickness: 1, height: 1),
-              ListViewCustomSearchResultItem(meals: meals),
-            ],
-          ),
-        ),
-      
+      ),
     );
   }
 }

@@ -4,12 +4,12 @@ import 'package:meal_planner/features/search/presentation/views/widgets/custom_s
 
 class ListViewCustomSearchResultItem extends StatelessWidget {
   const ListViewCustomSearchResultItem({super.key, required this.meals});
-final List<Meal> meals;
+  final List<Meal> meals;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return CustomSearchResultItem(meal:meals[index]);
+        return CustomSearchResultItem(meal: meals[index]);
       },
       itemCount: meals.length,
       physics: const NeverScrollableScrollPhysics(),

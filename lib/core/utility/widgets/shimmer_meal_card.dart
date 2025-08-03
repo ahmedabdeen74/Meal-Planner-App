@@ -28,11 +28,7 @@ class ShimmerMealCard extends StatelessWidget {
           child: Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
-            child: Container(
-              height: 16,
-              width: 150,
-              color: Colors.white,
-            ),
+            child: Container(height: 16, width: 150, color: Colors.white),
           ),
         ),
         const SizedBox(height: 4),
@@ -41,11 +37,7 @@ class ShimmerMealCard extends StatelessWidget {
           child: Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
-            child: Container(
-              height: 14,
-              width: 100,
-              color: Colors.white,
-            ),
+            child: Container(height: 14, width: 100, color: Colors.white),
           ),
         ),
       ],

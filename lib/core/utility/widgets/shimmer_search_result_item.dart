@@ -11,10 +11,7 @@ class ShimmerSearchResultItem extends StatelessWidget {
       highlightColor: Colors.grey[100]!,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 20,
-          color: Colors.white,
-        ),
+        child: Container(height: 20, color: Colors.white),
       ),
     );
   }

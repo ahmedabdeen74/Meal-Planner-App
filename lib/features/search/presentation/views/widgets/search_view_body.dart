@@ -28,8 +28,8 @@ class _SearchViewBodyState extends State<SearchViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
       child: isLoading
           ? BlocProvider(
-            create:(context) => SearchMealsCubit(getIt<SearchRepoImpl>()),
-            child: SearchViewBodyLoaded(
+              create: (context) => SearchMealsCubit(getIt<SearchRepoImpl>()),
+              child: SearchViewBodyLoaded(
                 controller: searchController,
                 onTapRemove: () {
                   searchController.clear();
@@ -40,7 +40,7 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                   });
                 },
               ),
-          )
+            )
           : FirstSearchBodyView(
               onTap: () {
                 setState(() {

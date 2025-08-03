@@ -8,20 +8,14 @@ class ListViewIngrediant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          final ingredient = meal.getIngredients()[index];
-          final measure = meal.getMeasures()[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IngrediantItem(
-              ingredient: ingredient,
-              measure: measure,
-            ),
-          );
-        },
-        childCount: meal.getIngredients().length, 
-      ),
+      delegate: SliverChildBuilderDelegate((context, index) {
+        final ingredient = meal.getIngredients()[index];
+        final measure = meal.getMeasures()[index];
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IngrediantItem(ingredient: ingredient, measure: measure),
+        );
+      }, childCount: meal.getIngredients().length),
     );
   }
 }

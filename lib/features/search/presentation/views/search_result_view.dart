@@ -16,7 +16,7 @@ class SearchResultView extends StatelessWidget {
 
   final void Function(String)? onChanged;
   final void Function()? onTap;
-  final String ? mealName;
+  final String? mealName;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class SearchResultView extends StatelessWidget {
       child: GestureDetector(
         onTap: () => hideKeyboardFromScreen(context),
         child: SafeArea(
-          child: Scaffold(body: SearchResultViewBody(mealName: mealName??"")),
+          child: Scaffold(body: SearchResultViewBody(mealName: mealName ?? "")),
         ),
       ),
     );

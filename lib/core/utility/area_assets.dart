@@ -1,0 +1,31 @@
+abstract class AssetsArea {
+  static const american = "assets/areas/american.png";
+  static const ukraine = "assets/areas/ukraine.png";
+  static const british = "assets/areas/british.png";
+  static const canada = "assets/areas/canada.png";
+  static const china = "assets/areas/china.png";
+  static const croatia = "assets/areas/croatia.png";
+  static const egypt = "assets/areas/egypt.png";
+  static const france = "assets/areas/france.png";
+  static const greek = "assets/areas/greek.png";
+  static const holanda = "assets/areas/holanda.png";
+  static const india = "assets/areas/india.png";
+  static const italy = "assets/areas/italy.png";
+  static const irlanda = "assets/areas/irlanda.png";
+  static const jamaica = "assets/areas/jamaica.png";
+  static const japan = "assets/areas/japan.png";
+  static const kenya = "assets/areas/kenya.png";
+  static const malaysia = "assets/areas/malaysia.png";
+  static const mexico = "assets/areas/mexico.png";
+  static const morocco = "assets/areas/morocco.png";
+  static const norway = "assets/areas/norway.png";
+  static const philippines = "assets/areas/philippines.png";
+  static const poland = "assets/areas/poland.png";
+  static const portugal = "assets/areas/portugal.png";
+  static const russia = "assets/areas/russia.png";
+  static const spain = "assets/areas/spain.png";
+  static const thailand = "assets/areas/thailand.png";
+  static const tunisia = "assets/areas/tunisia.png";
+  static const turkey = "assets/areas/turkey.png";
+  static const uruguay = "assets/areas/uruguay.png";
+}

@@ -7,7 +7,8 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.onChanged,
     this.suffixIcon,
-    this.onTap, this.controller,
+    this.onTap,
+    this.controller,
   });
   final Widget? prefixIcon;
   final Widget? suffixIcon;

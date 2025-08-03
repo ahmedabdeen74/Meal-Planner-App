@@ -14,7 +14,7 @@ class ListViewSearchResultItem extends StatelessWidget {
           child: SearchResultItem(meal: meals[index]),
         );
       },
-      itemCount:meals.length ,
+      itemCount: meals.length,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
     );

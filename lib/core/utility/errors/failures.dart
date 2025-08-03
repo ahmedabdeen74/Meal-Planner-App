@@ -29,9 +29,7 @@ class ServerFailure extends Failure {
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(
-          errMessage: 'Your request not found, please try later!');
-      //return ServerFailure(errMessage: response['error']['message']); because not all APIs return error messages in this format
+      return ServerFailure(errMessage: response['error']['message']);
     } else if (statusCode == 404) {
       return ServerFailure(
           errMessage: 'Your request not found, please try later!');

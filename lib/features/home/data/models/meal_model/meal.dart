@@ -281,7 +281,6 @@ class Meal extends Equatable {
       dateModified,
     ];
   }
-  
 }
 
 extension MealExtension on Meal {

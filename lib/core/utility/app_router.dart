@@ -1,5 +1,10 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:meal_planner/core/utility/service_locator.dart';
 import 'package:meal_planner/features/calendar/calendar_view.dart';
+import 'package:meal_planner/features/explore/data/repo/explore_repo_impl.dart';
+import 'package:meal_planner/features/explore/presentation/view_models/filter_cubits/fetch_filter_area_cubit.dart' show FetchFilterAreaCubit;
+import 'package:meal_planner/features/explore/presentation/view_models/filter_cubits/fetch_filter_category_cubit.dart';
 import 'package:meal_planner/features/explore/presentation/views/explore_view.dart';
 import 'package:meal_planner/features/explore/presentation/views/explore_view_details.dart';
 import 'package:meal_planner/features/favourite/favourite_view.dart';
@@ -50,10 +55,34 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: kExploreViewDetails,
-        builder: (context, state) => const ExploreViewDetails(),
+  path: kExploreViewDetails,
+  builder: (context, state) {
+    final extra = state.extra as Map<String, dynamic>;
+    final isCategory = extra['isCategory'] as bool;
+    final name = extra['name'] as String;
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => FetchFilterCategoryCubit(getIt<ExploreRepoImpl>())),
+        BlocProvider(create: (_) => FetchFilterAreaCubit(getIt<ExploreRepoImpl>())),
+      ],
+      child: ExploreViewDetails(
+        isCategory: isCategory,
+        name: name,
       ),
+    );
+  },
+),
+
+     /* GoRoute(
+        path: kExploreViewDetails,
+        builder: (context, state) {
+          final isCategory = state.extra as bool;
+          return ExploreViewDetails(isCategory: isCategory);
+        },
+      ),*/
     ],
+    
   );
 }
 

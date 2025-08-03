@@ -70,23 +70,25 @@ class MealCard extends StatelessWidget {
                 Positioned(
                   bottom: bottom,
                   right: right,
-                  child: Container(
-                    height: MediaQuery.sizeOf(context).height * .04,
-                    width: 85,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Text(
-                        meal.strCategory ?? "Category",
-                        textAlign: TextAlign.center,
-                        style: Styles.textStyleregular12,
+                  child: IntrinsicWidth(
+                    child: Container(
+                      //  height: MediaQuery.sizeOf(context).height * .04,
+                      //   width: 85,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          meal.strCategory ?? "Category",
+                          textAlign: TextAlign.center,
+                          style: Styles.textStyleregular12,
+                        ),
                       ),
                     ),
                   ),

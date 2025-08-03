@@ -15,7 +15,7 @@ class ShimmerGridView extends StatelessWidget {
         childAspectRatio: 0.75,
       ),
       itemBuilder: (context, index) {
-        return ShimmerMealCard(height: MediaQuery.sizeOf(context).height * .17,);
+        return ShimmerMealCard(height: MediaQuery.sizeOf(context).height * .17);
       },
     );
   }

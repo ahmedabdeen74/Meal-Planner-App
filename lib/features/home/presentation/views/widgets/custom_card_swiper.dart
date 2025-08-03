@@ -8,7 +8,7 @@ import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_details_cubit/fetch_meal_details_cubit.dart';
 
 class CustomCardSwiper extends StatefulWidget {
-  const CustomCardSwiper({super.key, required this.meals,this.itemCount});
+  const CustomCardSwiper({super.key, required this.meals, this.itemCount});
   final List<Meal> meals;
   final int? itemCount;
   @override
@@ -55,18 +55,12 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                       AssetsData.home1,
+                      child: Image.network(
+                        widget.meals[index].strMealThumb ?? AssetsData.home1,
                         fit: BoxFit.cover,
                         width: cardWidth,
                         height: cardHeight,
                       ),
-                      /* Image.network(
-                       widget.meals[index].strMealThumb ?? AssetsData.home1,
-                        fit: BoxFit.cover,
-                        width: cardWidth,
-                        height: cardHeight,
-                      ),*/
                     ),
                     if (index == currentIndex)
                       Positioned(
@@ -91,7 +85,7 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                               widget.meals[index].strArea ?? "Area",
+                                widget.meals[index].strArea ?? "Area",
                                 style: Styles.textStyleLight12.copyWith(
                                   color: Colors.white,
                                 ),

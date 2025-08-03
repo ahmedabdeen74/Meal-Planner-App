@@ -1,4 +1,3 @@
-
 class CardStyles {
   final double? height;
   final double? bottom;

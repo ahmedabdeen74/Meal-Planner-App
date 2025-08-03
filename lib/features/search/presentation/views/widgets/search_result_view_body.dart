@@ -256,7 +256,7 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
                     if (state is FetchMealsLoading) {
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        sliver: ShimmerGridView(), 
+                        sliver: ShimmerGridView(),
                       );
                     } else if (state is FetchMealsSuccess) {
                       return SliverPadding(

@@ -102,10 +102,7 @@ class _ShimmerHomeViewState extends State<ShimmerHomeView> {
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 250, 
-                  child: const ShimmerCardSwiper(),
-                ),
+                child: SizedBox(height: 250, child: const ShimmerCardSwiper()),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 24)),
               SliverToBoxAdapter(
@@ -138,7 +135,6 @@ class _ShimmerHomeViewState extends State<ShimmerHomeView> {
     );
   }
 }
-
 
 /*
 import 'package:flutter/material.dart';

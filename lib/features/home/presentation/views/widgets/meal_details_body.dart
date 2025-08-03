@@ -6,6 +6,7 @@ import 'package:meal_planner/features/home/presentation/views/widgets/list_view_
 import 'package:meal_planner/features/home/presentation/views/widgets/meal_details_app_bar.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/meal_details_card.dart';
 import 'package:meal_planner/features/home/presentation/views/widgets/video_instraction.dart';
+
 /*
 class MealDetailsBody extends StatelessWidget {
   const MealDetailsBody({super.key});

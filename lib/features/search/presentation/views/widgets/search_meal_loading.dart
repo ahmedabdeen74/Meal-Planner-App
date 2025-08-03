@@ -5,9 +5,7 @@ import 'package:meal_planner/features/search/presentation/views/widgets/custom_t
 import 'package:meal_planner/features/search/presentation/views/widgets/search_view_app_bar.dart';
 
 class SearchMealLoading extends StatelessWidget {
-  const SearchMealLoading({
-    super.key,
-  });
+  const SearchMealLoading({super.key});
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -40,6 +38,7 @@ class SearchMealLoading extends StatelessWidget {
     );
   }
 }
+
 /*
 SingleChildScrollView(
       child: Column(

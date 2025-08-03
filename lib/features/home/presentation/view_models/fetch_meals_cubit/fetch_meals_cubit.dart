@@ -8,9 +8,9 @@ part 'fetch_meals_state.dart';
 class FetchMealsCubit extends Cubit<FetchMealsState> {
   FetchMealsCubit(this.homeRepo) : super(FetchMealsInitial());
   final HomeRepo homeRepo;
-  fetchMeals({required int count }) async {
+  fetchMeals({required int count}) async {
     emit(FetchMealsLoading());
-    final result = await homeRepo.fetchMeals(count:count );
+    final result = await homeRepo.fetchMeals(count: count);
     result.fold(
       (failure) => emit(FetchMealsFailure(failure.errMessage)),
       (meals) => emit(FetchMealsSuccess(meals)),

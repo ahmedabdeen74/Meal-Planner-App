@@ -8,7 +8,9 @@ Future<void> saveMealToHistory(String mealName) async {
   List<String> meals = prefs.getStringList(key) ?? [];
 
   // لو موجودة بالفعل نحذفها عشان نعيد ترتيبها (ونمنع التكرار)
-  meals.removeWhere((item) => item.trim().toLowerCase() == mealName.trim().toLowerCase());
+  meals.removeWhere(
+    (item) => item.trim().toLowerCase() == mealName.trim().toLowerCase(),
+  );
 
   // نضيفها في أول القائمة
   meals.insert(0, mealName.trim());

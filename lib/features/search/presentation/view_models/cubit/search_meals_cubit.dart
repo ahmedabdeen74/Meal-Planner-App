@@ -16,7 +16,8 @@ class SearchMealsCubit extends Cubit<SearchMealsState> {
       (meals) => emit(SearchMealsSuccess(meals: meals)),
     );
   }
+
   void reset() {
-  emit(SearchMealsInitial());
-}
+    emit(SearchMealsInitial());
+  }
 }
