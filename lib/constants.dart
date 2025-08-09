@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 const kPrimaryColor = Colors.black;
 const kSecondaryColor = Colors.white;
+const kMealBox = "meal_box";
+const kMealBoxCalendar = "meal_box_calendar";
 //const kGreyColor = Color(0xff878787);
 void hideKeyboardFromScreen(BuildContext context) {
   final currentFocus = FocusScope.of(context);

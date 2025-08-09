@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:meal_planner/core/utility/service_locator.dart';
-import 'package:meal_planner/features/calendar/calendar_view.dart';
+import 'package:meal_planner/core/utility/di/service_locator.dart';
+import 'package:meal_planner/features/calendar/presentation/views/calendar_view.dart';
 import 'package:meal_planner/features/explore/data/repo/explore_repo_impl.dart';
 import 'package:meal_planner/features/explore/presentation/view_models/filter_cubits/fetch_filter_area_cubit.dart' show FetchFilterAreaCubit;
 import 'package:meal_planner/features/explore/presentation/view_models/filter_cubits/fetch_filter_category_cubit.dart';
 import 'package:meal_planner/features/explore/presentation/views/explore_view.dart';
 import 'package:meal_planner/features/explore/presentation/views/explore_view_details.dart';
-import 'package:meal_planner/features/favourite/favourite_view.dart';
+import 'package:meal_planner/features/favourite/presentation/views/favourite_view.dart';
 import 'package:meal_planner/features/home/presentation/views/home_view.dart';
 import 'package:meal_planner/features/search/presentation/views/search_result_view.dart';
 import 'package:meal_planner/features/search/presentation/views/search_view.dart';

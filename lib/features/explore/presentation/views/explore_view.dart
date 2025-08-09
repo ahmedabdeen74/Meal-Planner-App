@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/constants.dart';
-import 'package:meal_planner/core/utility/service_locator.dart';
+import 'package:meal_planner/core/utility/di/service_locator.dart';
 import 'package:meal_planner/features/explore/data/repo/explore_repo_impl.dart';
 import 'package:meal_planner/features/explore/presentation/view_models/fetch_area/fetch_area_cubit.dart';
 import 'package:meal_planner/features/explore/presentation/view_models/fetch_category/fetch_category_cubit.dart';

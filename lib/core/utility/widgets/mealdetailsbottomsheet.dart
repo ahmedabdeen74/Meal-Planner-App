@@ -64,7 +64,7 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                         ),
                       ),
                     ),
-                    if (showAppBar) const MealDetailsAppBar(),
+                    if (showAppBar)  MealDetailsAppBar(meal: state.meal,),
                     Expanded(
                       child: CustomScrollView(
                         controller: scrollController,

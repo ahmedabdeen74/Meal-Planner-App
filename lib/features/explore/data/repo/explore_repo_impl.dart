@@ -69,7 +69,6 @@ class ExploreRepoImpl extends ExploreRepo {
       final List<Meal> filterMeals = (result['meals'] as List)
           .map((e) => Meal.fromJson(e))
           .toList();
-
       return Right(filterMeals);
     } catch (e) {
       if (e is DioException) {
