@@ -1,6 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meal_planner/core/utility/di/service_locator.dart';
+import 'package:meal_planner/features/auth/auth_view.dart';
+import 'package:meal_planner/features/auth/presentation/views/sign_in_view.dart';
+import 'package:meal_planner/features/auth/presentation/views/sign_up_view.dart';
 import 'package:meal_planner/features/calendar/presentation/views/calendar_view.dart';
 import 'package:meal_planner/features/explore/data/repo/explore_repo_impl.dart';
 import 'package:meal_planner/features/explore/presentation/view_models/filter_cubits/fetch_filter_area_cubit.dart' show FetchFilterAreaCubit;
@@ -29,6 +32,18 @@ class AppRouter {
 
   static final router = GoRouter(
     routes: [
+      GoRoute(
+      path: kAuthView,
+      builder: (context, state) => const AuthView(),
+    ),
+    GoRoute(
+      path: kSignupView,
+      builder: (context, state) => const SignUpView(),
+    ),
+    GoRoute(
+      path: kLoginView,
+      builder: (context, state) => const SignInView(),
+    ),
       GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(path: kHomeView, builder: (context, state) => const HomeView()),
       GoRoute(

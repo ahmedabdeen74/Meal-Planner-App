@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,12 +12,59 @@ class CustomCardSwiper extends StatefulWidget {
   const CustomCardSwiper({super.key, required this.meals, this.itemCount});
   final List<Meal> meals;
   final int? itemCount;
+
   @override
   State<CustomCardSwiper> createState() => _CardSwiperExampleState();
 }
 
 class _CardSwiperExampleState extends State<CustomCardSwiper> {
   int currentIndex = 0;
+
+  // دالة لتحديد نوع الصورة (URL أو asset)
+  Widget getImageWidget(String? imagePath, double width, double height) {
+    const String defaultImageUrl =
+        'https://via.placeholder.com/150'; // رابط افتراضي
+    const String defaultAssetImage = AssetsData.home1; // صورة محلية افتراضية
+
+    if (imagePath == null || imagePath.isEmpty) {
+      return Image.asset(
+        defaultAssetImage,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      );
+    }
+    if (imagePath.startsWith('http')) {
+      return CachedNetworkImage(
+        imageUrl: imagePath,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        placeholder: (context, url) =>
+            Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) => Image.asset(
+          defaultAssetImage,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+        ),
+      );
+    } else if (imagePath.startsWith('assets/')) {
+      return Image.asset(
+        imagePath,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.asset(
+        defaultAssetImage,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +74,17 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
     return Center(
       child: GestureDetector(
         onTap: () {
-          BlocProvider.of<FetchMealDetailsCubit>(
-            context,
-          ).fetchMealDetails(id: widget.meals[currentIndex].idMeal!);
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            builder: (context) => const MealDetailsBottomSheet(),
-          );
-          //  GoRouter.of(context).push(AppRouter.kMealDetails);
+          if (widget.meals[currentIndex].idMeal?.isNotEmpty == true) {
+            BlocProvider.of<FetchMealDetailsCubit>(
+              context,
+            ).fetchMealDetails(id: widget.meals[currentIndex].idMeal!);
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => const MealDetailsBottomSheet(),
+            );
+          }
         },
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -55,11 +104,10 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        widget.meals[index].strMealThumb ?? AssetsData.home1,
-                        fit: BoxFit.cover,
-                        width: cardWidth,
-                        height: cardHeight,
+                      child: getImageWidget(
+                        widget.meals[index].strMealThumb,
+                        cardWidth,
+                        cardHeight,
                       ),
                     ),
                     if (index == currentIndex)
@@ -80,12 +128,16 @@ class _CardSwiperExampleState extends State<CustomCardSwiper> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.meals[index].strMeal ?? "Unknown Meal",
-                                style: Styles.textStyleSemibold13.copyWith(),
+                                widget.meals[index].strMeal?.isNotEmpty == true
+                                    ? widget.meals[index].strMeal!
+                                    : "Unknown Meal",
+                                style: Styles.textStyleSemibold13,
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                widget.meals[index].strArea ?? "Area",
+                                widget.meals[index].strArea?.isNotEmpty == true
+                                    ? widget.meals[index].strArea!
+                                    : "Unknown Area",
                                 style: Styles.textStyleLight12.copyWith(
                                   color: Colors.white,
                                 ),

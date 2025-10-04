@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_planner/constants.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/features/explore/presentation/views/widgets/list_view_meal_explore_card.dart';
-import 'package:meal_planner/features/home/data/local/Favourite/add_meal_cubit.dart';
+import 'package:meal_planner/features/favourite/data/local/Favourite/add_meal_cubit.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 
 class FavouriteViewBody extends StatelessWidget {
@@ -152,6 +153,7 @@ class FavouriteViewBody extends StatelessWidget {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
+        backgroundColor: kAlertColor,
         title: const Text("Confirm Delete"),
         content: Text(
           "Are you sure you want to remove '${meal.strMeal ?? 'this meal'}' from favorites?",

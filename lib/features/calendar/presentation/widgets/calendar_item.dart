@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:meal_planner/core/utility/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:meal_planner/constants.dart';
+import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/features/calendar/data/models/calendar_meal.dart';
 
 class CalendarItem extends StatelessWidget {
@@ -24,7 +25,9 @@ class CalendarItem extends StatelessWidget {
         _buildDateHeader(),
         const SizedBox(height: 16),
         // عرض جميع الوجبات لهذا التاريخ
-        ...mealsForDate.map((calendarMeal) => _buildMealCard(context, calendarMeal)),
+        ...mealsForDate.map(
+          (calendarMeal) => _buildMealCard(context, calendarMeal),
+        ),
         const SizedBox(height: 24),
       ],
     );
@@ -32,12 +35,12 @@ class CalendarItem extends StatelessWidget {
 
   Widget _buildDateHeader() {
     final isToday = _isToday(date);
-    
+
     return Row(
       children: [
         Text(
           _getFormattedDate(date),
-          style: isToday 
+          style: isToday
               ? Styles.textStyleSemibold21.copyWith(color: Colors.orange)
               : Styles.textStyleSemibold21,
         ),
@@ -80,7 +83,7 @@ class CalendarItem extends StatelessWidget {
 
   Widget _buildMealCard(BuildContext context, CalendarMeal calendarMeal) {
     final meal = calendarMeal.meal;
-    
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -157,12 +160,18 @@ class CalendarItem extends StatelessWidget {
     );
   }
 
-  void _showDeleteConfirmation(BuildContext context, CalendarMeal calendarMeal) {
+  void _showDeleteConfirmation(
+    BuildContext context,
+    CalendarMeal calendarMeal,
+  ) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: kAlertColor,
         title: const Text("Remove Meal"),
-        content: Text("Are you sure you want to remove \"${calendarMeal.meal.strMeal}\" from your calendar?"),
+        content: Text(
+          "Are you sure you want to remove \"${calendarMeal.meal.strMeal}\" from your calendar?",
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -183,16 +192,31 @@ class CalendarItem extends StatelessWidget {
 
   String _getFormattedDate(DateTime date) {
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.day}';
   }
 
   String _getDayName(DateTime date) {
     final days = [
-      'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-      'Friday', 'Saturday', 'Sunday'
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
     ];
     return days[date.weekday - 1];
   }
@@ -200,8 +224,8 @@ class CalendarItem extends StatelessWidget {
   bool _isToday(DateTime date) {
     final now = DateTime.now();
     return date.year == now.year &&
-           date.month == now.month &&
-           date.day == now.day;
+        date.month == now.month &&
+        date.day == now.day;
   }
 
   int _getIngredientsCount(meal) {

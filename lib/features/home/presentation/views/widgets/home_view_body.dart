@@ -16,10 +16,21 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<FetchMealsCubit>(context).fetchMeals(count: 8);
+    final cubit = BlocProvider.of<FetchMealsCubit>(context);
+
+    // اعرض الكاش أولاً
+    cubit.fetchMealsFromCache();
+
+    // بعد أول فريم، شغّل التحديث تلقائيًا مع إظهار RefreshIndicator
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _refreshIndicatorKey.currentState?.show();
+    });
   }
 
   Future<void> _refreshData() async {
@@ -39,6 +50,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: RefreshIndicator(
+                key: _refreshIndicatorKey,
                 onRefresh: _refreshData,
                 child: CustomScrollView(
                   slivers: [
@@ -71,28 +83,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       ),
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 16)),
-                    SliverToBoxAdapter(
-                      child: Text(
-                        "Greek",
-                        style: Styles.textStyleSemibold21.copyWith(
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Text(
-                        "Suggested cuisine",
-                        style: Styles.textStyleLight13.copyWith(
-                          color: Color(0xff232323),
-                        ),
-                      ),
-                    ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
-                    CustomSliverGridView(
-                      itemCount: state.meals.length,
-                      meal: state.meals,
-                    ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+
                     SliverToBoxAdapter(
                       child: Text(
                         "Daily Selection",
@@ -111,11 +102,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 8)),
                     SliverToBoxAdapter(
-                      child: Expanded(
-                        child: CustomCardSwiper(
-                          meals: state.meals,
-                          itemCount: state.meals.length,
-                        ),
+                      child: CustomCardSwiper(
+                        meals: state.meals,
+                        itemCount: state.meals.length,
                       ),
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 24)),
@@ -147,14 +136,34 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       ),
                     ),
 
-                    SliverToBoxAdapter(child: SizedBox(height: 24)),
+                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(
+                      child: Text(
+                        "Greek",
+                        style: Styles.textStyleSemibold21.copyWith(
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Text(
+                        "Suggested cuisine",
+                        style: Styles.textStyleLight13.copyWith(
+                          color: Color(0xff232323),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    CustomSliverGridView(
+                      itemCount: state.meals.length,
+                      meal: state.meals,
+                    ),
                   ],
                 ),
               ),
             ),
           );
         }
-        // Always return a widget if none of the above states match
         return SizedBox.shrink();
       },
     );

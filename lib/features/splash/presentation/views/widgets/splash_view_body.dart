@@ -4,6 +4,7 @@ import 'package:meal_planner/constants.dart';
 import 'package:meal_planner/core/utility/app_router.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/features/auth/data/auth_service.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -16,12 +17,23 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5), () {
-      // use replace not go or push to prevent user to back to splash again.
+    Future.delayed(const Duration(seconds: 5), () {
       if (mounted) {
-        GoRouter.of(context).replace(AppRouter.kHomeView);
+        // Trigger navigation after checking user status
+        _checkUserStatus();
       }
     });
+  }
+
+  void _checkUserStatus() async {
+    final user = await AuthService().getCurrentUser();
+    if (mounted) {
+      if (user != null) {
+        GoRouter.of(context).replace(AppRouter.kHomeView);
+      } else {
+        GoRouter.of(context).replace(AppRouter.kAuthView);
+      }
+    }
   }
 
   @override

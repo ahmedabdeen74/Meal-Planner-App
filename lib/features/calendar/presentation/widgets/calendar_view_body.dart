@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/core/utility/styles.dart';
+import 'package:meal_planner/features/calendar/data/local/calendar/calendar_cubit.dart';
+import 'package:meal_planner/features/calendar/data/local/calendar/calendar_state.dart';
 import 'package:meal_planner/features/calendar/presentation/widgets/calendar_item.dart';
-import 'package:meal_planner/features/home/data/local/calendar/calendar_cubit.dart';
-import 'package:meal_planner/features/home/data/local/calendar/calendar_state.dart';
 
 class CalendarViewBody extends StatelessWidget {
   const CalendarViewBody({super.key});

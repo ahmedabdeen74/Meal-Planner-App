@@ -1,51 +1,86 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:meal_planner/core/utility/api_service.dart';
 import 'package:meal_planner/core/utility/errors/failures.dart';
+import 'package:meal_planner/features/home/data/data_sources/local/home_local_data_source.dart';
+import 'package:meal_planner/features/home/data/data_sources/remote/home_remote_Data_source.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
-import 'package:meal_planner/features/home/data/models/meal_model/meal_model.dart';
-import 'package:meal_planner/features/home/data/repo/home_repo.dart';
-
+import 'package:meal_planner/features/home/domain/repo/home_repo.dart';
 class HomeRepoImpl implements HomeRepo {
-  final ApiService apiService;
+  final HomeRemoteDataSource homeRemoteDataSource;
+  final HomeLocalDataSource homeLocalDataSource;
 
-  HomeRepoImpl({required this.apiService});
+  HomeRepoImpl({
+    required this.homeRemoteDataSource,
+    required this.homeLocalDataSource,
+  });
+
   @override
   Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
-    try {
-      final data = await apiService.get(endpoint: "lookup.php?i=$mealId");
-      final Meal meal = MealModel.fromJson(data).meals!.first;
-      return right(meal);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
-      return left(ServerFailure(errMessage: e.toString()));
+    // رجّع الأول من الكاش
+    final localMeal = homeLocalDataSource.fetchMealDetails(mealId);
+    if (localMeal != null) {
+      // مش محتاجينها دلوقت دي في حالة عاوز اعمل تحديث للوجبة عشان لو اتغير فيها حاجة يتم عرض احدث نسخة
+       homeRemoteDataSource.fetchMealDetails(mealId);
+      return right(localMeal);
     }
+
+    // لو مش موجود في الكاش → هات من الريموت
+    return await homeRemoteDataSource.fetchMealDetails(mealId);
   }
 
   @override
   Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
-    try {
-      final futures = List.generate(
-        count,
-        (_) => apiService.get(endpoint: "random.php"),
-      );
-      final responses = await Future.wait(futures);
-
-      final meals = responses
-          .map((data) => MealModel.fromJson(data).meals?.first)
-          .whereType<Meal>()
-          .toList();
-
-      return right(meals);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServerFailure.fromDioError(e));
-      }
-      return left(ServerFailure(errMessage: e.toString()));
+    final localMeals = homeLocalDataSource.fetchMeals();
+    if (localMeals.isNotEmpty) {
+      // اعرض الكاش الأول
+     homeRemoteDataSource.fetchMeals(count: count); // تحديث في الخلفية
+      return right(localMeals);
     }
+
+    // لو مفيش كاش → هات من الريموت
+    return await homeRemoteDataSource.fetchMeals(count: count);
   }
+  @override
+  List<Meal> fetchMealsFromCache() {
+    return homeLocalDataSource.fetchMeals();
+  }
+
+}
+
+
+/*
+class HomeRepoImpl implements HomeRepo {
+  final HomeRemoteDataSource homeRemoteDataSource;
+  final HomeLocalDataSource homeLocalDataSource;
+
+  HomeRepoImpl({
+    required this.homeRemoteDataSource,
+    required this.homeLocalDataSource,
+  });
+  @override
+  Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
+    final result = await homeRemoteDataSource.fetchMealDetails(mealId);
+    return result; // لا حاجة لاستخدام fold هنا
+  }
+
+  @override
+  Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
+    var meal = await homeLocalDataSource.fetchMeals();
+    if (meal != null && meal.isNotEmpty) {
+      return right(meal);
+    }
+    var meals = await homeRemoteDataSource.fetchMeals(count: count);
+    return right(meals);
+  }
+
+  /*  @override
+  Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
+    var meal = await homeLocalDataSource.fetchMeals();
+    if (meal.isNotEmpty) {
+      return right(meal);
+    }
+    var meals = await homeRemoteDataSource.fetchMeals(count: count);
+    return right(meals);
+  }*/
 }
 
 /*class HomeRepoImpl implements HomeRepo {
@@ -77,4 +112,7 @@ class HomeRepoImpl implements HomeRepo {
     }
   }
 
-}*/
+}
+*/
+
+*/

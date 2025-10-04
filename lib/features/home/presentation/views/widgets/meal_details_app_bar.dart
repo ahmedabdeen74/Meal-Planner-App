@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meal_planner/core/utility/app_router.dart';
 import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
-import 'package:meal_planner/features/home/data/local/Favourite/add_meal_cubit.dart';
-import 'package:meal_planner/features/home/data/local/calendar/calendar_cubit.dart';
-import 'package:meal_planner/features/home/data/local/calendar/calendar_state.dart' show CalendarFailure, CalendarMealAdded, CalendarState, CalendarLoading;
+import 'package:meal_planner/features/auth/data/auth_service.dart';
+import 'package:meal_planner/features/calendar/data/local/calendar/calendar_cubit.dart';
+import 'package:meal_planner/features/calendar/data/local/calendar/calendar_state.dart' show CalendarFailure, CalendarMealAdded, CalendarState, CalendarLoading;
+import 'package:meal_planner/features/favourite/data/local/Favourite/add_meal_cubit.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 
 class MealDetailsAppBar extends StatelessWidget {
@@ -78,7 +81,12 @@ class MealDetailsAppBar extends StatelessWidget {
                             GestureDetector(
                               onTap: () async {
                                 Navigator.of(context).pop(); // إغلاق القائمة
-                                await _showDatePicker(context);
+                                final user = await AuthService().getCurrentUser();
+                                if (user == null) {
+                                  _showSignInDialog(context);
+                                } else {
+                                  await _showDatePicker(context);
+                                }
                               },
                               child: Row(
                                 children: [
@@ -102,9 +110,14 @@ class MealDetailsAppBar extends StatelessWidget {
                             const SizedBox(height: 32),
                             // Favorite Button
                             GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                                BlocProvider.of<AddMealCubit>(context).toggleFavorite(meal);
+                              onTap: () async {
+                                Navigator.of(context).pop(); // إغلاق القائمة
+                                final user = await AuthService().getCurrentUser();
+                                if (user == null) {
+                                  _showSignInDialog(context);
+                                } else {
+                                  BlocProvider.of<AddMealCubit>(context).toggleFavorite(meal);
+                                }
                               },
                               child: Row(
                                 children: [
@@ -221,6 +234,30 @@ class MealDetailsAppBar extends StatelessWidget {
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // عرض رسالة تسجيل الدخول
+  void _showSignInDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Sign In Required"),
+        content: const Text("You need to sign in to access this feature."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              GoRouter.of(context).push(AppRouter.kLoginView);
+            },
+            child: const Text("Sign In"),
           ),
         ],
       ),

@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meal_planner/constants.dart';
+import 'package:meal_planner/features/calendar/data/local/calendar/calendar_state.dart' show CalendarState, CalendarInitial, CalendarLoading, CalendarFailure, CalendarLoaded, CalendarMealAdded, CalendarMealRemoved;
 import 'package:meal_planner/features/calendar/data/models/calendar_meal.dart';
-import 'package:meal_planner/features/home/data/local/calendar/calendar_state.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 
 

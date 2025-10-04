@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 
@@ -15,12 +16,19 @@ class IngrediantItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16),
       child: Row(
         children: [
-          Image.network(
+          CachedNetworkImage(
+                imageUrl:'https://www.themealdb.com/images/ingredients/$ingredient-Small.png',
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                
+       /*   Image.network(
             'https://www.themealdb.com/images/ingredients/$ingredient-Small.png',
             width: 50,
             height: 50,
             errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
-          ),
+          ),*/
           SizedBox(width: 48),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

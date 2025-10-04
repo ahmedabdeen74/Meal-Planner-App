@@ -18,4 +18,7 @@ abstract class AssetsData {
   static const splash = 'assets/images/splash.jpg';
   static const user = 'assets/images/user.png';
   static const video1 = 'assets/images/video1.png';
+  static const auth1 = 'assets/images/auth1.png';
+  static const auth2 = 'assets/images/auth2.jpg';
+  static const googleIcon = "assets/images/google_icon.png";
 }
