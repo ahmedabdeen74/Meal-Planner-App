@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:meal_planner/core/utility/api_service.dart';
+import 'package:meal_planner/core/network/api_service.dart';
 import 'package:meal_planner/features/explore/data/repo/explore_repo_impl.dart';
 import 'package:meal_planner/features/home/data/data_sources/local/home_local_data_source.dart';
 import 'package:meal_planner/features/home/data/data_sources/remote/home_remote_Data_source.dart';

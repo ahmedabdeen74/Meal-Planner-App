@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:meal_planner/core/utility/api_service.dart';
+import 'package:meal_planner/core/network/api_service.dart';
+import 'package:meal_planner/core/network/app_endpoints.dart';
 import 'package:meal_planner/core/utility/errors/failures.dart';
 import 'package:meal_planner/features/explore/data/models/area/meal.dart'
     show Meal, AreaMeal;
@@ -16,7 +17,7 @@ class ExploreRepoImpl extends ExploreRepo {
   @override
   Future<Either<Failure, List<AreaMeal>>> fetchArea() async {
     try {
-      final result = await apiService.get(endpoint: "list.php?a=list");
+      final result = await apiService.requestAPI(url:AppEndpoints.fetchArea, type: RequestType.get, headers: {});
 
       if (result.containsKey('meals')) {
         final List<AreaMeal> areas = (result['meals'] as List)
@@ -37,7 +38,7 @@ class ExploreRepoImpl extends ExploreRepo {
   @override
   Future<Either<Failure, List<CategoryMeal>>> fetchCategory() async {
     try {
-      final result = await apiService.get(endpoint: "list.php?c=list");
+      final result = await apiService.requestAPI(url: AppEndpoints.fetchCategory, type: RequestType.get, headers: {});
 
       if (result.containsKey('meals')) {
         final List<CategoryMeal> category = (result['meals'] as List)
@@ -60,7 +61,7 @@ class ExploreRepoImpl extends ExploreRepo {
     required String area,
   }) async {
     try {
-      final result = await apiService.get(endpoint: "filter.php?a=$area");
+      final result = await apiService.requestAPI(url:AppEndpoints.filterByArea(area), type: RequestType.get, headers: {});
 
       if (result['meals'] == null) {
         return Left(ServerFailure(errMessage: "No meals found for area $area"));
@@ -83,7 +84,7 @@ class ExploreRepoImpl extends ExploreRepo {
     required String category,
   }) async {
     try {
-      final result = await apiService.get(endpoint: "filter.php?c=$category");
+      final result = await apiService.requestAPI(url:AppEndpoints.filterByCategory(category), type: RequestType.get, headers: {});
 
       if (result['meals'] == null) {
         return Left(

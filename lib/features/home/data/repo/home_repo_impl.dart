@@ -15,15 +15,11 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
-    // رجّع الأول من الكاش
     final localMeal = homeLocalDataSource.fetchMealDetails(mealId);
     if (localMeal != null) {
-      // مش محتاجينها دلوقت دي في حالة عاوز اعمل تحديث للوجبة عشان لو اتغير فيها حاجة يتم عرض احدث نسخة
        homeRemoteDataSource.fetchMealDetails(mealId);
       return right(localMeal);
     }
-
-    // لو مش موجود في الكاش → هات من الريموت
     return await homeRemoteDataSource.fetchMealDetails(mealId);
   }
 
@@ -31,8 +27,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
     final localMeals = homeLocalDataSource.fetchMeals();
     if (localMeals.isNotEmpty) {
-      // اعرض الكاش الأول
-     homeRemoteDataSource.fetchMeals(count: count); // تحديث في الخلفية
+     homeRemoteDataSource.fetchMeals(count: count); 
       return right(localMeals);
     }
 
