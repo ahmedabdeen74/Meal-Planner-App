@@ -166,26 +166,26 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
                 ),
                 BlocBuilder<FetchMealsCubit, FetchMealsState>(
                   builder: (context, state) {
-                    if (state is FetchMealsLoading) {
+                    if (state.status == FetchMealsStatus.loading) {
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         sliver: ShimmerGridView(),
                       );
-                    } else if (state is FetchMealsSuccess) {
+                    } else if (state.status == FetchMealsStatus.loaded) {
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         sliver: CustomSliverGridView(
-                          meal: state.meals,
-                          itemCount: state.meals.length,
+                          meal: state.meals!,
+                          itemCount: state.meals!.length,
                         ),
                       );
-                    } else if (state is FetchMealsFailure) {
+                    } else if (state.status == FetchMealsStatus.error) {
                       return SliverToBoxAdapter(
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Center(
                             child: Text(
-                              state.errorMessage,
+                              state.errorMessage ?? 'An error occurred',
                               style: TextStyle(color: Colors.red),
                             ),
                           ),
@@ -200,7 +200,7 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
             : [
                 BlocBuilder<FetchMealDetailsCubit, FetchMealDetailsState>(
                   builder: (context, state) {
-                    if (state is FetchMealDetailsLoading) {
+                    if (state.status == FetchMealDetailsStatus.loading) {
                       return SliverToBoxAdapter(
                         child: Padding(
                           padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
@@ -209,16 +209,16 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
                           ),
                         ),
                       );
-                    } else if (state is FetchMealDetailsFailure) {
+                    } else if (state .status == FetchMealDetailsStatus.error) {
                       return SliverToBoxAdapter(
                         child: Center(
                           child: Text(
-                            state.errorMessage,
+                            state.errorMessage?? 'An error occurred',
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
                       );
-                    } else if (state is FetchMealDetailsSuccess) {
+                    } else if (state.status == FetchMealDetailsStatus.loaded) {
                       return SliverList(
                         delegate: SliverChildListDelegate.fixed([
                           Padding(
@@ -229,7 +229,7 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 MealCard(
-                                  meal: state.meal,
+                                  meal: state.meal!,
                                   height:
                                       MediaQuery.sizeOf(context).height * .35,
                                   style2: Styles.textStyleLight13.copyWith(
@@ -253,26 +253,26 @@ class _SearchResultViewBodyState extends State<SearchResultViewBody> {
                 ),
                 BlocBuilder<FetchMealsCubit, FetchMealsState>(
                   builder: (context, state) {
-                    if (state is FetchMealsLoading) {
+                    if (state.status == FetchMealsStatus.loading) {
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         sliver: ShimmerGridView(),
                       );
-                    } else if (state is FetchMealsSuccess) {
+                    } else if (state.status == FetchMealsStatus.loaded) {
                       return SliverPadding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         sliver: CustomSliverGridView(
-                          meal: state.meals,
-                          itemCount: state.meals.length,
+                          meal: state.meals!,
+                          itemCount: state.meals!.length,
                         ),
                       );
-                    } else if (state is FetchMealsFailure) {
+                    } else if (state.status == FetchMealsStatus.error) {
                       return SliverToBoxAdapter(
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Center(
                             child: Text(
-                              state.errorMessage,
+                              state.errorMessage?? 'An error occurred',
                               style: TextStyle(color: Colors.red),
                             ),
                           ),

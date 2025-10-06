@@ -35,7 +35,7 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
   Widget build(BuildContext context) {
     return BlocBuilder<FetchMealDetailsCubit, FetchMealDetailsState>(
       builder: (context, state) {
-        if (state is FetchMealDetailsSuccess) {
+        if (state.status == FetchMealDetailsStatus.loaded) {
           return DraggableScrollableSheet(
             controller: _draggableController,
             expand: true,
@@ -64,7 +64,7 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                         ),
                       ),
                     ),
-                    if (showAppBar)  MealDetailsAppBar(meal: state.meal,),
+                    if (showAppBar) MealDetailsAppBar(meal: state.meal!),
                     Expanded(
                       child: CustomScrollView(
                         controller: scrollController,
@@ -75,10 +75,10 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                               child: SizedBox(height: 16),
                             ),
                           SliverToBoxAdapter(
-                            child: MealDetailsCard(meal: state.meal),
+                            child: MealDetailsCard(meal: state.meal!),
                           ),
                           const SliverToBoxAdapter(child: SizedBox(height: 8)),
-                          ListViewIngrediant(meal: state.meal),
+                          ListViewIngrediant(meal: state.meal!),
                           const SliverToBoxAdapter(child: SizedBox(height: 16)),
                           const SliverToBoxAdapter(
                             child: Padding(
@@ -91,7 +91,7 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
                           ),
                           const SliverToBoxAdapter(child: SizedBox(height: 8)),
                           SliverToBoxAdapter(
-                            child: VideoInstraction(meal: state.meal),
+                            child: VideoInstraction(meal: state.meal!),
                           ),
                           const SliverToBoxAdapter(child: SizedBox(height: 24)),
                         ],
@@ -102,9 +102,9 @@ class _MealDetailsBottomSheetState extends State<MealDetailsBottomSheet> {
               );
             },
           );
-        } else if (state is FetchMealDetailsLoading) {
+        } else if (state.status == FetchMealDetailsStatus.loading) {
           return Text("");
-        } else if (state is FetchMealDetailsFailure) {
+        } else if (state.status == FetchMealDetailsStatus.error) {
           return Center(child: Text("Error: ${state.errorMessage}"));
         }
         return const SizedBox.shrink();

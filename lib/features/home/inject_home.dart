@@ -9,7 +9,7 @@ import 'package:meal_planner/features/home/domain/use_case/fetch_meals_use_case.
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meal_details_cubit/fetch_meal_details_cubit.dart';
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meals_cubit/fetch_meals_cubit.dart'
     show FetchMealsCubit;
-
+/*
 final getIt = GetIt.instance;
 void injectHome() {
   // Data Sources
@@ -51,3 +51,4 @@ void injectHome() {
     () => FetchMealDetailsCubit(getIt()),
   );
 }
+*/

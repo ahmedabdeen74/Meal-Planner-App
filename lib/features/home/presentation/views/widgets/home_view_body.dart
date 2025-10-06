@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_planner/config/app_helper/app_gaps.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/core/utility/widgets/shimmer_home_view.dart';
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meals_cubit/fetch_meals_cubit.dart';
@@ -24,10 +25,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     super.initState();
     final cubit = BlocProvider.of<FetchMealsCubit>(context);
 
-    // اعرض الكاش أولاً
     cubit.fetchMealsFromCache();
 
-    // بعد أول فريم، شغّل التحديث تلقائيًا مع إظهار RefreshIndicator
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshIndicatorKey.currentState?.show();
     });
@@ -41,11 +40,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<FetchMealsCubit, FetchMealsState>(
       builder: (context, state) {
-        if (state is FetchMealsLoading) {
+        if (state.status == FetchMealsStatus.loading) {
           return ShimmerHomeView();
-        } else if (state is FetchMealsFailure) {
+        } else if (state.status == FetchMealsStatus.error) {
           return Center(child: Text("Error: ${state.errorMessage}"));
-        } else if (state is FetchMealsSuccess) {
+        } else if (state.status == FetchMealsStatus.loaded) {
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -55,7 +54,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(child: CustomAppBar()),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(child: AppGaps.defaultGap),
                     SliverToBoxAdapter(
                       child: Text(
                         "Today’s Meal",
@@ -75,14 +74,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SliverToBoxAdapter(child: SizedBox(height: 16)),
                     SliverToBoxAdapter(
                       child: MealCard(
-                        meal: state.meals[6],
+                        meal: state.meals![6],
                         height: MediaQuery.sizeOf(context).height * .35,
                         style2: Styles.textStyleLight13.copyWith(
                           color: Color(0xff4E4E4E),
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(child: AppGaps.defaultGap),
 
                     SliverToBoxAdapter(
                       child: Text(
@@ -103,8 +102,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SliverToBoxAdapter(child: SizedBox(height: 8)),
                     SliverToBoxAdapter(
                       child: CustomCardSwiper(
-                        meals: state.meals,
-                        itemCount: state.meals.length,
+                        meals: state.meals!,
+                        itemCount: state.meals!.length,
                       ),
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 24)),
@@ -127,7 +126,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     SliverToBoxAdapter(child: SizedBox(height: 16)),
                     SliverToBoxAdapter(
                       child: MealCard(
-                        meal: state.meals[3],
+                        meal: state.meals![3],
                         height: MediaQuery.sizeOf(context).height * .35,
                         style2: Styles.textStyleLight13.copyWith(
                           color: Color(0xff4E4E4E),
@@ -155,8 +154,8 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     ),
                     SliverToBoxAdapter(child: SizedBox(height: 16)),
                     CustomSliverGridView(
-                      itemCount: state.meals.length,
-                      meal: state.meals,
+                      itemCount: state.meals!.length,
+                      meal: state.meals!,
                     ),
                   ],
                 ),
