@@ -8,7 +8,6 @@ import 'package:meal_planner/features/home/data/repo/home_repo_impl.dart';
 import 'package:meal_planner/features/home/domain/use_case/fetch_meal_details.dart';
 import 'package:meal_planner/features/home/domain/use_case/fetch_meals_use_case.dart';
 import 'package:meal_planner/features/search/data/repo/search_repo_impl.dart';
-import 'package:meal_planner/features/search/presentation/view_models/cubit/search_meals_cubit.dart';
 
 final getIt = GetIt.instance;
 void setupServiceLocator() {

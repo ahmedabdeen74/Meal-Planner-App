@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meal_planner/config/app_helper/app_gaps.dart';
+import 'package:meal_planner/config/app_helper/app_padding.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/core/utility/widgets/shimmer_home_view.dart';
 import 'package:meal_planner/features/home/presentation/view_models/fetch_meals_cubit/fetch_meals_cubit.dart';
@@ -25,7 +26,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
     super.initState();
     final cubit = BlocProvider.of<FetchMealsCubit>(context);
 
-    cubit.fetchMealsFromCache();
+     cubit.fetchMealsFromCache();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshIndicatorKey.currentState?.show();
@@ -47,7 +48,10 @@ class _HomeViewBodyState extends State<HomeViewBody> {
         } else if (state.status == FetchMealsStatus.loaded) {
           return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.defaultPadding24,
+                vertical: AppPadding.defaultPadding16,
+              ),
               child: RefreshIndicator(
                 key: _refreshIndicatorKey,
                 onRefresh: _refreshData,
@@ -71,7 +75,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(child: AppGaps.defaultGap),
                     SliverToBoxAdapter(
                       child: MealCard(
                         meal: state.meals![6],
@@ -99,14 +103,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 8)),
+                    SliverToBoxAdapter(child: AppGaps.smallGap),
                     SliverToBoxAdapter(
                       child: CustomCardSwiper(
                         meals: state.meals!,
                         itemCount: state.meals!.length,
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 24)),
+                    SliverToBoxAdapter(child: AppGaps.bigGap),
                     SliverToBoxAdapter(
                       child: Text(
                         "Meal to Prepare",
@@ -123,7 +127,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(child: AppGaps.defaultGap),
                     SliverToBoxAdapter(
                       child: MealCard(
                         meal: state.meals![3],
@@ -152,7 +156,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(height: 16)),
+                    SliverToBoxAdapter(child: AppGaps.defaultGap),
                     CustomSliverGridView(
                       itemCount: state.meals!.length,
                       meal: state.meals!,

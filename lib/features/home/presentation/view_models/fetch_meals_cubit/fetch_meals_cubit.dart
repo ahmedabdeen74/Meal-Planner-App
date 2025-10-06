@@ -31,19 +31,14 @@ class FetchMealsCubit extends Cubit<FetchMealsState> {
         ),
       ),
     );
-    
   }
+
   void fetchMealsFromCache() {
     final localMeals = fetchMealsUseCase.homeRepo.fetchMealsFromCache();
     if (localMeals.isNotEmpty) {
-      emit(state.copyWith(
-        status: FetchMealsStatus.loaded,
-        meals: localMeals,
-      ));
+      emit(state.copyWith(status: FetchMealsStatus.loaded, meals: localMeals));
     }
   }
-  
-  
 }
 
 /*

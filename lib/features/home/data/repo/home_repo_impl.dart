@@ -4,6 +4,7 @@ import 'package:meal_planner/features/home/data/data_sources/local/home_local_da
 import 'package:meal_planner/features/home/data/data_sources/remote/home_remote_Data_source.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
 import 'package:meal_planner/features/home/domain/repo/home_repo.dart';
+
 class HomeRepoImpl implements HomeRepo {
   final HomeRemoteDataSource homeRemoteDataSource;
   final HomeLocalDataSource homeLocalDataSource;
@@ -15,30 +16,28 @@ class HomeRepoImpl implements HomeRepo {
 
   @override
   Future<Either<Failure, Meal>> fetchMealDetails(String mealId) async {
-    final localMeal = homeLocalDataSource.fetchMealDetails(mealId);
+    /*  final localMeal = homeLocalDataSource.fetchMealDetails(mealId);
     if (localMeal != null) {
        homeRemoteDataSource.fetchMealDetails(mealId);
       return right(localMeal);
-    }
+    }*/
     return await homeRemoteDataSource.fetchMealDetails(mealId);
   }
 
   @override
   Future<Either<Failure, List<Meal>>> fetchMeals({required int count}) async {
-    final localMeals = homeLocalDataSource.fetchMeals();
+    /*final localMeals = homeLocalDataSource.fetchMeals();
     if (localMeals.isNotEmpty) {
      homeRemoteDataSource.fetchMeals(count: count); 
       return right(localMeals);
-    }
-
-    // لو مفيش كاش → هات من الريموت
+    }*/
     return await homeRemoteDataSource.fetchMeals(count: count);
   }
+
   @override
   List<Meal> fetchMealsFromCache() {
     return homeLocalDataSource.fetchMeals();
   }
-
 }
 
 

@@ -1,20 +1,12 @@
-/*
-class APPADDING {
-  static const double defaultPadding = 16.0;
-  static const double smallPadding = 8.0;
-  static const double bigPadding = 24.0;
+class AppPadding {
+  static const extraSmallPadding = 3.0;
+  static const soSmallPadding = 5.0;
+  static const smallPadding = 10.0;
+  static const tinySmallPadding = 12.0;
+  static const defaultPadding16 = 16.0;
+  static const defaultPadding20 = 20.0;
+  static const defaultPadding24 = 24.0;
+  static const bigPadding = 40.0;
+  static const soBigPadding = 80.0;
+  static const extraBigPadding = 120.0;
 }
-
-Padding(
-  padding: EdgeInsets.all(AppPadding.defaultPadding),
-  child: Text("Hello World"),
-);
-
-Container(
-  padding: EdgeInsets.symmetric(
-    horizontal: AppPadding.smallPadding,
-    vertical: AppPadding.bigPadding,
-  ),
-  child: Text("Consistent UI"),
-);
-*/

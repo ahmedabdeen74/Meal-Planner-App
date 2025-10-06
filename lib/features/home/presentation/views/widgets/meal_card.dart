@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meal_planner/config/app_helper/app_padding.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 import 'package:meal_planner/core/utility/widgets/mealdetailsbottomsheet.dart';
 import 'package:meal_planner/features/home/data/models/meal_model/meal.dart';
@@ -10,7 +11,7 @@ class MealCard extends StatelessWidget {
   const MealCard({
     super.key,
     required this.height,
-    this.bottom = 12,
+    this.bottom = AppPadding.tinySmallPadding,
     this.right = 14,
     this.style1 = Styles.textStyleMedium18,
     required this.style2,
@@ -28,9 +29,7 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // صورة افتراضية في حالة عدم وجود صورة
-    const String defaultImageUrl =
-        'https://via.placeholder.com/150'; // رابط صورة افتراضية
+    const String defaultImageUrl = 'https://via.placeholder.com/150';
 
     return Container(
       child: Column(
@@ -84,7 +83,7 @@ class MealCard extends StatelessWidget {
                   child: IntrinsicWidth(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
+                        horizontal: AppPadding.soSmallPadding,
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
@@ -107,16 +106,16 @@ class MealCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: AppPadding.smallPadding),
           Padding(
-            padding: const EdgeInsets.only(left: 12),
+            padding: const EdgeInsets.only(left: AppPadding.tinySmallPadding),
             child: Text(
               meal.strMeal?.isNotEmpty == true ? meal.strMeal! : "Unknown Meal",
               style: style1,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 12),
+            padding: const EdgeInsets.only(left: AppPadding.tinySmallPadding),
             child: Text(
               showIngredientsCountInsteadOfArea
                   ? "${meal.getIngredients().length} Ingredients"
