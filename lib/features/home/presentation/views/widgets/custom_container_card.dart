@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meal_planner/core/utility/assets.dart';
 import 'package:meal_planner/core/utility/styles.dart';
 
 class CustomContainerCard extends StatelessWidget {

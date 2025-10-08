@@ -20,11 +20,10 @@ class CustomCardSwiper extends StatefulWidget {
 class _CardSwiperExampleState extends State<CustomCardSwiper> {
   int currentIndex = 0;
 
-  // دالة لتحديد نوع الصورة (URL أو asset)
+ 
   Widget getImageWidget(String? imagePath, double width, double height) {
-    const String defaultImageUrl =
-        'https://via.placeholder.com/150'; // رابط افتراضي
-    const String defaultAssetImage = AssetsData.home1; // صورة محلية افتراضية
+    const String defaultImageUrl = 'https://via.placeholder.com/150';
+    const String defaultAssetImage = AssetsData.home1;
 
     if (imagePath == null || imagePath.isEmpty) {
       return Image.asset(
